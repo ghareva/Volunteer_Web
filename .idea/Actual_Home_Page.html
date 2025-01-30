@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer Homepage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+      background: #ddd;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      padding: 0;
+    }
+    .nav-links li {
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: #ccc;
+      min-width: 150px;
+      padding: 10px;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .search-bar {
+      margin: 20px;
+      padding: 10px;
+      width: 80%;
+    }
+    .leaderboard, .featured-places {
+      margin: 20px;
+      padding: 15px;
+      border: 1px solid #000;
+    }
+    .leaderboard ul {
+      list-style: none;
+      padding: 0;
+    }
+    .featured-places {
+      display: flex;
+      justify-content: space-around;
+    }
+    .place {
+      width: 150px;
+      height: 150px;
+      background: lightblue;
+      text-align: center;
+      padding: 10px;
+    }
+    .footer {
+      text-align: center;
+      padding: 15px;
+      background: #ddd;
+    }
+  </style>
+</head>
+<body>
+<div class="navbar">
+  <ul class="nav-links">
+    <li>HOME</li>
+    <li>VOLUNTEER</li>
+    <li class="dropdown">
+      GET HELP
+      <div class="dropdown-content">
+        <p>Here's OPTION 1</p>
+        <p>heres Option 2</p>
+        <p>i'm codign at the speed of freaking sound bois</p>
+      </div>
+    </li>
+    <li>SIGNUP/LOGIN</li>
+  </ul>
+</div>
+<input class="search-bar" type="text" placeholder="Search for PLACES TO VOLUNTEER">
+
+<div class="leaderboard">
+  <h3>Leaderboard Top Volunteer</h3>
+  <ul>
+    <li>BRADONATOR - Volunteered 144 hours this week</li>
+    <li>GAV - Volunteered 99 hours this week</li>
+    <li>BUNCHES101 - sucks~ 100 hours this week</li>
+    <li> is the leaderboard only dong top 3?!??!</li>
+    <li>this has changes</li>
+  </ul>
+</div>
+
+<div class="featured-places">
+  <div class="place">⭐️⭐️⭐️⭐️⭐️</div>
+  <div class="place">⭐️⭐️⭐️⭐️⭐️</div>
+  <div class="place">⭐️⭐️⭐️⭐️⭐️</div>
+</div>
+
+<div class="footer">
+  <p>ABOUT US PAGE | FAQs | CONTACT US | ACCESSIBILITY | SHOP OUR MERCH | HOW ARE WE DOING?</p>
+</div>
+</body>
+</html>
