@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Page Title</title>
+
+<link rel="stylesheet" href="General_style_sheet.css">
+
+</head>
+
+<body>
+
+    <div class="navbar">
+        <ul class="nav-links">
+          <li class = "dropdown">
+            HOME
+            <div class="dropdown-content">
+              <p><a href = "Actual_Home_Page.html" target = _self title = "Link to the Volunteering page">Homepage Link</a></p>
+            </div>
+          </li>
+    
+        </ul>
+      </div>
+
+<h1>Login Page</h1>
+<p>This is a login page.</p>
+
+    <h1>Login below!</h1>
+    <form action = "action_page.php" method = "POST">
+        <div>
+            <!-- This provides a label for the input-->
+            <label for = "fname">first name:</label>
+            <!--This provides a box for the user to input their information-->
+            <input type = "text" id = "fname" name = "fname" placeholder="First Name" required>
+        </div>
+
+        <br> <!-- This puts a break in the text--> 
+
+        <div>
+            <label for = "Lname">last name:</label>
+            <input type = "text" id = "Lname" name = "Lname" placeholder="Last Name" required>
+        </div>
+
+        <br>
+
+        <div>
+            <label for = "pass">password:</label>
+            <input type = "password" id = "pass" name = "pass" required maxlength = "12" placeholder = "************">
+        </div>
+
+        <br>
+
+        <div>
+            <label for = "email">email:</label>
+            <input type = "email" id = "email" name = "email" required placeholder = "123bobbert@gmail.com">
+        </div>
+
+        <br>
+
+        <div>
+            <label for = "phone">phone #:</label>
+            <input type = "tel" id = "phone" name = "phone" required placeholder = "407-668-889">
+        </div>
+
+        <br>
+
+        <div>
+            <label for = "bdate">birthday:</label>
+            <input type = "date" id = "bdate" name = "bdate" required placeholder = "1/2/2023">
+        </div>
+
+        <br>
+
+        <div>
+            <label for = "title">title:</label>
+
+            <label for = "Mr. ">Mr.</label>
+            <input type = "radio" id = "Mr. " name = "title" value = "Mr.">
+
+            <label for = "Mrs. ">Mrs.</label>
+            <input type = "radio" id = "Mrs. " name = "title" value = "Mrs. ">
+
+            <label for = "PhD. ">PhD.</label>
+            <input type = "radio" id = "PhD. " name = "title" value = "PhD. ">
+        </div>
+
+        <br>
+
+        <div>
+            <label for = "terms_and_conditions">Do you agree to the terms and conditions?:</label>
+            <input type = "checkbox" id = "terms_and_conditions" name = "terms_and_conditions" required>
+        </div>
+        
+        <br>
+
+        <div>
+            <input type = "submit">
+        </div>
+
+    </form>
+
+</body>
+</html>
