@@ -1,3 +1,3 @@
 # Volunteer_Web
 We will use this one >:)
-can I add things here?
+Ignore the .idea folder. make all pushed and commits to the CAP folder!
