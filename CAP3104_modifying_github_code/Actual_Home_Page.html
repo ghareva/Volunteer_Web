@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Volunteer Homepage</title>
-  <style>
+  <link rel="stylesheet" href="General_style_sheet.css">
+  <!-- <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -87,34 +88,41 @@
       filter: brightness(0.8); 
     }
 
-  </style>
+  </style> -->
 </head>
-<body>
-<div class="navbar">
-  <ul class="nav-links">
-    <li>HOME</li>
-    <li class = "dropdown">
-    VOLUNTEER
-    <div class="dropdown-content">
-      <!-- Not sure if we should make these buttons directly clickable -->
-      <p><a href = "Volunteer_page.html" target = _self title = "Link to the Volunteering page">Volunteer Link</a></p>
-    </div>
-    </li>
-    <li class="dropdown">
-      GET HELP
-      <div class="dropdown-content">
-        <!-- Removed some placeholders from here. -->
-        <p><a href = "GetHelp_Page.html" target = _self title = "Link to the Get Help page">Get Help Link</a></p>
-      </div>
-    </li>
-    <li class = "dropdown">
-    SIGNUP/LOGIN
-    <div class="dropdown-content">
-      <p><a href = "Login_Page.html" target = _self title = "Link to the Login page">Login Page Link</a></p>
-    </div>
-  </li>
-  </ul>
-</div>
+<body class = "light-mode">
+<nav>
+  <div class ="nav-left">
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <a href = "Actual_Home_Page.html" target = _self title = "Link to the Home page">Home</a>
+          </td>
+          <td>
+            <a href = "Volunteer_page.html" target = _self title = "Link to the Volunteering page">Volunteer Link</a>
+          </td>
+          <td>
+            <a href = "GetHelp_Page.html" target = _self title = "Link to the Get Help page">Get help</a>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+  <div class="nav-right">
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <a href = "Login_Page.html" target = _self title = "Link to the Login page">Sign Up/Log In</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</nav>
 <input class="search-bar" type="text" placeholder="Search for PLACES TO VOLUNTEER">
 <input type = "submit" title = "Search">
 

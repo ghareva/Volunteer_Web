@@ -1,39 +1,119 @@
+:root {
+  --white-darker: #f4f8fb;
+  --white: #fcfcfd;
+  --temp-green: #0bba60;
+  --green-darker: #099A4F;
+  --dark-green: #066836;
+  --dark-green-lighter: #088745;
+  --text-black: #000000;
+}
+
+
 body {
-    background: #ffffff;
-    background-repeat: no-repeat;
+  background-color: var(--white);
+  background-repeat: no-repeat;
     background-attachment: fixed;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
   }
 
-  .navbar {
+nav{
+    background-color: var(--temp-green);
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    height: 60px;
+    color: var(--text-black);
+}
+
+body.dark-mode nav{
+  background-color: var(--dark-green);
+  color: var(--white-darker);
+}
+
+body.dark-mode nav td:hover{
+  background-color: var(--dark-green-lighter);
+}
+
+nav .nav-right{
+  margin-right: 30px;
+display: flex;
+flex-direction: row-reverse;
+flex-grow: 1;
+}
+nav .nav-left{
+  margin-left: 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+nav td{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+nav td:hover{
+  background-color: var(--green-darker);
+  
+}
+
+nav table{
+  border-collapse: collapse;
+}
+
+nav a{
+  height: 55px;
+  box-sizing: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  text-decoration: none;
+  color:inherit;
+}
+  .search-bar {
+    margin: 20px;
+    padding: 10px;
+    width: 80%;
+  }
+  .leaderboard, .featured-places {
+    margin: 90px;
+    padding: 15px;
+    border: 20px solid #000;
+  }
+  .leaderboard ul {
+    list-style: none;
+    border: 1px solid #000;
+    padding: 5px;
+  }
+  .featured-places {
+    display: flex;
+    justify-content: space-around;
+  }
+  .place {
+    width: 200px;
+    height: 200px;
+    background: lightblue;
+    text-align: center;
+    padding: 10px;
+  }
+  .footer {
+    text-align: center;
     padding: 15px;
     background: #ddd;
   }
 
-  .nav-links {
-    display: flex;
-    list-style: none;
-    padding: 0;
+  .image-container
+  {
+  position: relative;
+  display: inline-block;
   }
-  .nav-links li {
-    margin-right: 20px;
-    cursor: pointer;
+
+  .image-hover 
+  {
+  transition: 0.3s;
   }
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background: #ccc;
-    min-width: 150px;
-    padding: 10px;
-  }
-  .dropdown:hover .dropdown-content {
-    display: block;
+
+  .image-hover:hover 
+  {
+    filter: brightness(0.8); 
   }
