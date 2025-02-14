@@ -13,13 +13,13 @@
             <tbody>
             <tr>
                 <td>
-                    <a href = "Actual_Home_Page.html" target = _self title = "Link to the Home page">Home</a>
+                    <a href = "index.php" target = _self title = "Link to the Home page">Home</a>
                 </td>
                 <td>
-                    <a href = "Volunteer_Page.html" target = _self title = "Link to the Volunteering page">Volunteer Link</a>
+                    <a href = "Volunteer_Page.php" target = _self title = "Link to the Volunteering page">Volunteer Link</a>
                 </td>
                 <td>
-                    <a href = "GetHelp_Page.html" target = _self title = "Link to the Get Help page">Get help</a>
+                    <a href = "GetHelp_Page.php" target = _self title = "Link to the Get Help page">Get help</a>
                 </td>
             </tr>
             </tbody>
@@ -31,7 +31,17 @@
             <tbody>
             <tr>
                 <td>
-                    <a href = "Login_Page.html" target = _self title = "Link to the Login page">Sign Up/Log In</a>
+                    <?php
+                    if (isset($_SESSION['userId']))
+                    {
+                        echo "<a href = 'profile.php' target = _self title = 'Profile Page'>Profile Page</a>";
+                        echo "<a href = 'includes/logout.inc.php' target = _self title = 'Logout'>Log out</a>";
+                    }
+                    else
+                    {
+                        echo "<a href = 'login.php' target = _self title = 'Link to the Login page'>Sign Up/Log In</a>";
+                    }
+                    ?>
                 </td>
             </tr>
             </tbody>

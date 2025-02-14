@@ -30,12 +30,6 @@ if (isset($_POST['submit']))
         exit(); // Stops script from running
     }
 
-    if (invalidEmail($email) !== false)
-    {
-        header("location: ../signup.php?error=invalidemail");
-        exit(); // Stops script from running
-    }
-
     if (passwordMatch($password, $passwordRepeat) !== false)
     {
         header("location: ../signup.php?error=passwordmismatch");

@@ -56,9 +56,12 @@ function usernameExists($conn, $username, $email)
     mysqli_stmt_execute($stmt);
 
     $resultData = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
 
     if ($row = mysqli_fetch_assoc($resultData))
     {
+        // Returns an associative array from users table w/
+        // users name, email, username, and hashed password
         return $row;
     }
     else
@@ -66,9 +69,7 @@ function usernameExists($conn, $username, $email)
         return $result;
     }
 
-    mysqli_stmt_close($stmt);
 }
-
 function createUser($conn, $name, $email, $username, $password)
 {
     $sql = "INSERT INTO users (usersName, usersEmail, usersUsername, usersPassword) VALUES (?, ?, ?, ?);";
@@ -81,9 +82,49 @@ function createUser($conn, $name, $email, $username, $password)
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $username, $password);
+    mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $username, $hashedPassword);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     header("location: ../signup.php?error=none");
     exit();
 }
+
+function emptyInputLogin($username, $password)
+{
+    $result = false;
+    if(empty($username) || empty($password))
+    {
+        $result = true;
+    }
+
+    return $result;
+}
+
+function loginUser($conn, $username, $password)
+{
+    $usernameExists = usernameExists($conn, $username, $username);
+
+    if ($usernameExists === false)
+    {
+        header("location: ../login.php?error=wronglogin");
+        exit();
+    }
+
+    $hashedPassword = $usernameExists["usersPassword"];
+    $checkPassword = password_verify($password, $hashedPassword);
+
+    if ($checkPassword === false)
+    {
+        header("location: ../login.php?error=wronglogin");
+        exit();
+    }
+    else if ($checkPassword === true)
+    {
+        session_start();
+        $_SESSION["userId"] = $usernameExists["usersId"];
+        $_SESSION["userUsername"] = $usernameExists["usersUsername"];
+        header("location: ../index.php");
+        exit();
+    }
+}
+

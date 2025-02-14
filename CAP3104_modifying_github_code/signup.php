@@ -24,6 +24,35 @@
                 <button type="submit" name="submit">Sign Up</button>
             </div>
         </form>
+        <?php
+        if (isset($_GET["error"]))
+        {
+            if ($_GET["error"] == "emptyinput")
+            {
+                echo "<p>Fill in all the fields!</p>";
+            }
+            else if ($_GET["error"] == "invalidemail")
+            {
+                echo "<p>Invalid Email!</p>";
+            }
+            else if ($_GET["error"] == "invalidusername")
+            {
+                echo "<p>Invalid Username!</p>";
+            }
+            else if ($_GET["error"] == "passwordmismatch")
+            {
+                echo "<p>Passwords don't match!</p>";
+            }
+            else if ($_GET["error"] == "usernametaken")
+            {
+                echo "<p>Username already taken!</p>";
+            }
+            else if ($_GET["error"] == "none")
+            {
+                echo "<p>You have signed up!</p>";
+            }
+        }
+        ?>
     </section>
 
 <?php
