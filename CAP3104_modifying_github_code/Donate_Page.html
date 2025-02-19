@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+
+<link rel="stylesheet" href="General_style_sheet.css">
+
+<style>
+  select, input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+  }
+
+  select:focus, input:focus {
+    border-color: #ff0000; 
+    outline: none;
+  }
+
+  .hidden {
+    display: none;
+    margin-top: 10px;
+  }
+
+  /* thank you message styling */
+  #thank-you-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    z-index: 1000;
+  }
+  .alert-box {
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  button {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  button:hover {
+    background-color: #d40000;
+  }
+</style>
+</head>
+<body>
+
+<!-- navigation menu -->
+<nav>
+    <div class ="nav-left">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <a href = "Actual_Home_Page.html" target = _self title = "Link to the Home page">Home</a>
+            </td>
+            <td>
+              <a href = "Volunteer_Page.html" target = _self title = "Link to the Volunteering page">Volunteer Link</a>
+            </td>
+            <td>
+              <a href = "GetHelp_Page.html" target = _self title = "Link to the Get Help page">Get help</a>
+            </td>
+            <td>
+              <a href = "Donate_Page.html" target = _self title = "Link to the Donate page" >Donate</a>
+            </td>
+          </tr>
+        </tbody>
+  
+      </table>
+    </div>
+    <div class="nav-right">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <a href = "Login_Page.html" target = _self title = "Link to the Login page">Sign Up/Log In</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+  </nav>
+
+
+<h1>Donation Page</h1>
+
+<!-- donation amount dropdown -->
+<label for="donation-options">Choose a donation amount:</label>
+<select id="donation-options" name="donation" onchange="toggleCustomAmount()" required>
+  <option value="10">$10</option>
+  <option value="25">$25</option>
+  <option value="50">$50</option>
+  <option value="100">$100</option>
+  <option value="custom">Custom Amount</option>
+</select>
+
+<!-- hidden input for custom donation amount -->
+<input type="number" id="custom-amount" name="custom-amount" placeholder="Enter custom amount" class="hidden">
+
+<br><br>
+
+<!-- donation form -->
+<form action="action_page.php" method="POST" onsubmit="return validateForm(event)">
+
+    <!-- organization dropdown -->
+    <label for="organization">Choose an organization to donate to!</label>
+    <select id="organization" name="organization" onchange="toggleCustomOrganization()" required>
+        <option value="">-- Select an organization --</option>
+        <option value="red-cross">Red Cross</option>
+        <option value="unicef">UNICEF</option>
+        <option value="wwf">World Wildlife Fund (WWF)</option>
+        <option value="doctors-without-borders">Doctors Without Borders</option>
+        <option value="local-food-bank">Local Food Bank</option>
+        <option value="uncle-ben's-farm">Uncle Ben's Farm</option>
+        <option value="custom">Other (Specify Below)</option>
+    </select>
+
+    <!-- hidden input for custom organization -->
+    <input type="text" id="custom-organization" name="custom-organization" placeholder="Enter organization name" class="hidden">
+
+    <br><br>
+
+    <input type="submit" title="Submit">
+</form>
+
+<!-- thank you message container (initially hidden) -->
+<div id="thank-you-message" class="hidden">
+    <div class="alert-box">
+        <p id="thank-you-text"></p>
+        <button onclick="closeThankYouMessage()">OK</button>
+    </div>
+</div>
+
+<script>
+//show custom amount input when "custom amount" is selected
+function toggleCustomAmount() {
+    var selectBox = document.getElementById("donation-options");
+    var customInput = document.getElementById("custom-amount");
+
+    if (selectBox.value === "custom") {
+        customInput.style.display = "block";
+        customInput.setAttribute("required", "true");
+    } else {
+        customInput.style.display = "none";
+        customInput.removeAttribute("required");
+        customInput.value = "";
+    }
+}
+
+//show custom organization input when "other" is selected
+function toggleCustomOrganization() {
+    var selectBox = document.getElementById("organization");
+    var customInput = document.getElementById("custom-organization");
+
+    if (selectBox.value === "custom") {
+        customInput.style.display = "block";
+        customInput.setAttribute("required", "true");
+    } else {
+        customInput.style.display = "none";
+        customInput.removeAttribute("required");
+        customInput.value = "";
+    }
+}
+
+//validate form and show thank you message
+function validateForm(event) {
+    //prevent form submission
+    event.preventDefault(); 
+
+    var organizationSelect = document.getElementById("organization");
+    var customOrganizationInput = document.getElementById("custom-organization");
+    var donationSelect = document.getElementById("donation-options");
+    var customAmountInput = document.getElementById("custom-amount");
+
+    var selectedOrganization = organizationSelect.value === "custom" ? customOrganizationInput.value.trim() : organizationSelect.options[organizationSelect.selectedIndex].text;
+    var selectedAmount = donationSelect.value === "custom" ? customAmountInput.value.trim() : donationSelect.options[donationSelect.selectedIndex].text;
+
+    if (organizationSelect.value === "custom" && customOrganizationInput.value.trim() === "") {
+        alert("Please enter the custom organization name.");
+        return false;
+    }
+
+    if (donationSelect.value === "custom" && (customAmountInput.value.trim() === "" || isNaN(customAmountInput.value) || customAmountInput.value <= 0)) {
+        alert("Please enter a valid donation amount.");
+        return false;
+    }
+
+    document.getElementById("thank-you-text").innerText = `Thank you for donating ${selectedAmount} to ${selectedOrganization}!`;
+    document.getElementById("thank-you-message").classList.remove("hidden");
+    //prevent actual form submission
+    return false; 
+}
+
+//close the thank you message
+function closeThankYouMessage() {
+    document.getElementById("thank-you-message").classList.add("hidden");
+}
+</script>
+
+</body>
+</html>
