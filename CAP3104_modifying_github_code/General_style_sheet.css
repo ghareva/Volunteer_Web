@@ -53,11 +53,18 @@ nav td{
 }
 nav td:hover{
   background-color: var(--green-darker);
-  
 }
-
+nav td:active{
+  background-color: var(--green-darker);
+}
+nav td:focus{
+  background-color: var(--green-darker);
+}
 nav table{
   border-collapse: collapse;
+}
+.nav-link.active {
+  background-color: var(--green-darker);
 }
 
 nav a{
