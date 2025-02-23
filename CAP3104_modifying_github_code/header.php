@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +25,9 @@
                 <td>
                     <a href = "GetHelp_Page.php" target = _self title = "Link to the Get Help page">Get help</a>
                 </td>
+                <td>
+                    <a href = "Donate_Page.php" target = _self title = "Link to the Donate page" >Donate</a>
+                </td>
             </tr>
             </tbody>
 
@@ -30,19 +37,44 @@
         <table>
             <tbody>
             <tr>
-                <td>
-                    <?php
-                    if (isset($_SESSION['userId']))
+                <?php
+                /*
+                if (isset($_SESSION['usersId']))
+                {
+                    echo "<a href = 'profile.php' target = _self title = 'Profile Page'>Profile Page</a>";
+                    echo "<a href = 'includes/logout.inc.php' target = _self title = 'Logout'>Log out</a>";
+                }
+                else
+                {
+                    echo "<a href = 'login.php' target = _self title = 'Link to the Login page'>Sign Up/Log In</a>";
+                }
+                */
+                ?>
+                <?php
+                    if(isset($_SESSION['usersId']))
                     {
-                        echo "<a href = 'profile.php' target = _self title = 'Profile Page'>Profile Page</a>";
-                        echo "<a href = 'includes/logout.inc.php' target = _self title = 'Logout'>Log out</a>";
+                ?>
+                    <td>
+                        <a href="User_Profile.php"><?php echo $_SESSION["usersUsername"]; ?></a>
+                    </td>
+                    <td>
+                        <a href="includes/logout.inc.php">Logout</a>
+                    </td>
+                <?php
                     }
                     else
                     {
-                        echo "<a href = 'login.php' target = _self title = 'Link to the Login page'>Sign Up/Log In</a>";
+                ?>
+                    <td>
+                        <a href="signup.php">Sign Up</a>
+                    </td>
+                    <td>
+                        <a href="login.php">Login</a>
+                    </td>
+                <?php
                     }
-                    ?>
-                </td>
+                ?>
+
             </tr>
             </tbody>
         </table>

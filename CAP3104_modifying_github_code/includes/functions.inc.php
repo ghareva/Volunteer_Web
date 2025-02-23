@@ -82,7 +82,7 @@ function createUser($conn, $name, $email, $username, $password)
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $username, $hashedPassword);
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hashedPassword);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     header("location: ../signup.php?error=none");
