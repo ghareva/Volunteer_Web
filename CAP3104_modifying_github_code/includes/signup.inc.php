@@ -1,5 +1,6 @@
 <?php
 // If user got here properly by clicking submit on signup.php
+/*
 if (isset($_POST['submit']))
 {
     $name = $_POST['name'];
@@ -50,4 +51,27 @@ else
     header("location: ../signup.php");
     exit();
 }
+*/
 
+if (isset($_POST['submit']))
+{
+    // Grabbing the data
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $passwordRepeat = $_POST['passwordRepeat'];
+
+    // Instantiate SignupContr class
+    include "../classes/dbh.classes.php";
+    include "../classes/signup.classes.php";
+    include "../classes/signup-contr.classes.php";
+    $signup = new SignupContr($name, $email, $username, $password, $passwordRepeat);
+
+    // Running error handlers and user signup
+    $signup->signupUser();
+
+    // Going back to front page
+    header("location:../index.php?error=none");
+
+}
