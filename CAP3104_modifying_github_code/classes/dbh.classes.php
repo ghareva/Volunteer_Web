@@ -16,6 +16,9 @@ class dbh
             print "Error!: " . $e->getMessage() . "<br/>";
             die();
         }
+    }//other one lol
+   public function getConnection() {
+        return $this->connect();
     }
 
 }

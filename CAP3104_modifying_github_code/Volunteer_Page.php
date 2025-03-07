@@ -1,5 +1,41 @@
 <?php
     include_once 'header.php';
+    //Everything below this was all added extra after by meeee
+
+    // 1. Include your DB class
+    require_once __DIR__ . '/classes/dbh.classes.php';
+
+    // 2. Instantiate and connect
+    $dbObj = new dbh();
+    $conn  = $dbObj->getConnection();
+
+    // 3. Handle filters (if you want them)
+    $whereClauses = [];
+    $params       = [];
+
+    // Example filters: volunteering_type, organization_type, city
+    if (!empty($_GET['volunteering_type'])) {
+        $whereClauses[] = 'volunteering_type = :volunteering_type';
+        $params[':volunteering_type'] = $_GET['volunteering_type'];
+    }
+    if (!empty($_GET['organization_type'])) {
+        $whereClauses[] = 'organization_type = :organization_type';
+        $params[':organization_type'] = $_GET['organization_type'];
+    }
+    if (!empty($_GET['city'])) {
+        $whereClauses[] = 'city = :city';
+        $params[':city'] = $_GET['city'];
+    }
+
+    // Build the final query
+    $sql = "SELECT * FROM volunteer_companies";
+    if (count($whereClauses) > 0) {
+        $sql .= " WHERE " . implode(' AND ', $whereClauses);
+    }
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute($params);
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <head>
     <style>
@@ -123,13 +159,46 @@
         <button onclick="applyFilters()">Apply Filters</button>
     </div>
 
-    <!-- Main Content for Volunteer Opportunities -->
+    <!-- Main Content for Volunteer Opportunities
     <div class="main-content" id="volunteerList">
-        <!-- Placeholder Cards will be injected here -->
+        Placeholder Cards will be injected here
     </div>
+-->
+    <!-- Main Content for Volunteer Opportunities -->
+    <!--
+    <div class="main-content" id="volunteerList">
+        <?php foreach ($results as $company): ?>
+            <div class="card">
+                 Wrap everything in an anchor so the whole card is clickable
+                <a href="company_profile.php?id=<?php echo $company['id']; ?>"
+                   style="text-decoration: none; color: inherit; display: block;">
+
+                    <img src="<?php echo htmlspecialchars($company['image_url'] ?? 'https://via.placeholder.com/250'); ?>"
+                         alt="<?php echo htmlspecialchars($company['name']); ?>">
+
+                    <h3><?php echo htmlspecialchars($company['name']); ?></h3>
+
+                    <p>
+                        <?php echo htmlspecialchars($company['address'] . ', ' . $company['city']); ?>
+                    </p>
+
+                    <div class="tags">
+                        <span><?php echo htmlspecialchars($company['volunteering_type']); ?></span>
+                        <span><?php echo htmlspecialchars($company['organization_type']); ?></span>
+                    </div>
+                </a>
+            </div>
+
+        <?php endforeach; ?>
+    </div>
+-->
+
+<div class="main-content" id="volunteerList"></div>
 </main>
 
+
 <script>
+    /*
     const volunteerData = [
         {name: 'Helping Hands', type: 'Business', location: 'NYC', orgType: 'Non-Profit', description: 'A non-profit helping people in need.', image: 'https://via.placeholder.com/250', tags: ['Non-Profit', 'Support']},
         {name: 'Green Earth', type: 'Soup Kitchen', location: 'LA', orgType: '501(c)(3)', description: 'Serving meals to the homeless.', image: 'https://via.placeholder.com/250', tags: ['Food', 'Shelter']},
@@ -139,6 +208,7 @@
 
     // Function to display the cards
     function displayCards(data) {
+
         const container = document.getElementById('volunteerList');
         container.innerHTML = ''; // Clear previous results
         data.forEach(opportunity => {
@@ -176,8 +246,71 @@
     }
 
     // Initial load of volunteer opportunities
-    displayCards(volunteerData);
+    displayCards(volunteerData); */
+    const volunteerData = <?php echo json_encode($results); ?>;
+
+
+    <!--Shows card data-->
+
+    function applyFilters() {
+      const searchVal = document.getElementById('search').value.toLowerCase();
+      const locationVal = document.getElementById('location').value.toLowerCase();
+      const typeVal = document.getElementById('type').value.toLowerCase();
+      const orgVal = document.getElementById('orgType').value.toLowerCase();
+
+      const filteredData = volunteerData.filter(item => {
+        // Convert item fields to lower case for comparison
+        const nameLC = item.name.toLowerCase();
+        const cityLC = item.city.toLowerCase();
+        const volTypeLC = item.volunteering_type.toLowerCase();
+        const orgTypeLC = item.organization_type.toLowerCase();
+
+        const matchesSearch = !searchVal || nameLC.includes(searchVal);
+        const matchesCity = !locationVal || cityLC === locationVal;
+        const matchesType = !typeVal || volTypeLC === typeVal;
+        const matchesOrg = !orgVal || orgTypeLC === orgVal;
+
+        return matchesSearch && matchesCity && matchesType && matchesOrg;
+      });
+
+      displayCards(filteredData);
+    }
+
+
+
+
+
+  function displayCards(data) {
+    const container = document.getElementById('volunteerList');
+    container.innerHTML = ''; // Clear previous cards
+
+    data.forEach(item => {
+      // Convert columns to your desired HTML
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      // Fallback image if image_url is empty
+      const imageUrl = item.image_url || 'https://via.placeholder.com/250';
+
+      card.innerHTML = `
+        <a href="company_profile.php?id=${item.id}" style="text-decoration: none; color: inherit; display: block;">
+          <img src="${imageUrl}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p>${item.address}, ${item.city}</p>
+          <div class="tags">
+            <span>${item.volunteering_type}</span>
+            <span>${item.organization_type}</span>
+          </div>
+        </a>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+displayCards(volunteerData);
+
 </script>
+
 
 <?php
     include_once 'footer.php';
