@@ -1,0 +1,317 @@
+<?php
+    include_once 'header.php';
+    //Everything below this was all added extra after by meeee
+
+    // 1. Include your DB class
+    require_once __DIR__ . '/classes/dbh.classes.php';
+
+    // 2. Instantiate and connect
+    $dbObj = new dbh();
+    $conn  = $dbObj->getConnection();
+
+    // 3. Handle filters (if you want them)
+    $whereClauses = [];
+    $params       = [];
+
+    // Example filters: volunteering_type, organization_type, city
+    if (!empty($_GET['volunteering_type'])) {
+        $whereClauses[] = 'volunteering_type = :volunteering_type';
+        $params[':volunteering_type'] = $_GET['volunteering_type'];
+    }
+    if (!empty($_GET['organization_type'])) {
+        $whereClauses[] = 'organization_type = :organization_type';
+        $params[':organization_type'] = $_GET['organization_type'];
+    }
+    if (!empty($_GET['city'])) {
+        $whereClauses[] = 'city = :city';
+        $params[':city'] = $_GET['city'];
+    }
+
+    // Build the final query
+    $sql = "SELECT * FROM volunteer_companies";
+    if (count($whereClauses) > 0) {
+        $sql .= " WHERE " . implode(' AND ', $whereClauses);
+    }
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute($params);
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Stack content below the nav */
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar label {
+            margin-bottom: 10px;
+        }
+        .sidebar select, .sidebar input {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 100%;
+        }
+        .sidebar button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .sidebar button:hover {
+            background-color: #45a049;
+        }
+
+        /* Main content */
+        .main-content {
+            margin-left: 20px;
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Card styling */
+        .card {
+            width: 250px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .card h3 {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+        .card p {
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+        .card .tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        .card .tags span {
+            background-color: #f1f1f1;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 0.8em;
+        }
+        .content-container {
+            display: flex;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<main class="content-container">
+    <!-- Sidebar Filters -->
+    <div class="sidebar">
+        <h3>Filter Opportunities</h3>
+        <label for="search">Search by Name:</label>
+        <input type="text" id="search" placeholder="Search for a volunteer opportunity...">
+        <label for="location">Location:</label>
+        <select id="location">
+            <option value="">Select Location</option>
+            <option value="NYC">New York City</option>
+            <option value="LA">Los Angeles</option>
+            <option value="Chicago">Chicago</option>
+        </select>
+        <label for="type">Type of Volunteering:</label>
+        <select id="type">
+            <option value="">Select Type</option>
+            <option value="Business">Business</option>
+            <option value="Shelter">Shelter</option>
+            <option value="Soup Kitchen">Soup Kitchen</option>
+            <option value="Event">Event</option>
+        </select>
+        <label for="orgType">Organization Type:</label>
+        <select id="orgType">
+            <option value="">Select Organization</option>
+            <option value="Individual">Individual</option>
+            <option value="Private">Private</option>
+            <option value="Non-Profit">Non-Profit</option>
+            <option value="501(c)(3)">501(c)(3)</option>
+        </select>
+        <button onclick="applyFilters()">Apply Filters</button>
+    </div>
+
+    <!-- Main Content for Volunteer Opportunities
+    <div class="main-content" id="volunteerList">
+        Placeholder Cards will be injected here
+    </div>
+-->
+    <!-- Main Content for Volunteer Opportunities -->
+    <!--
+    <div class="main-content" id="volunteerList">
+        <?php foreach ($results as $company): ?>
+            <div class="card">
+                 Wrap everything in an anchor so the whole card is clickable
+                <a href="company_profile.php?id=<?php echo $company['id']; ?>"
+                   style="text-decoration: none; color: inherit; display: block;">
+
+                    <img src="<?php echo htmlspecialchars($company['image_url'] ?? 'https://via.placeholder.com/250'); ?>"
+                         alt="<?php echo htmlspecialchars($company['name']); ?>">
+
+                    <h3><?php echo htmlspecialchars($company['name']); ?></h3>
+
+                    <p>
+                        <?php echo htmlspecialchars($company['address'] . ', ' . $company['city']); ?>
+                    </p>
+
+                    <div class="tags">
+                        <span><?php echo htmlspecialchars($company['volunteering_type']); ?></span>
+                        <span><?php echo htmlspecialchars($company['organization_type']); ?></span>
+                    </div>
+                </a>
+            </div>
+
+        <?php endforeach; ?>
+    </div>
+-->
+
+<div class="main-content" id="volunteerList"></div>
+</main>
+
+
+<script>
+    /*
+    const volunteerData = [
+        {name: 'Helping Hands', type: 'Business', location: 'NYC', orgType: 'Non-Profit', description: 'A non-profit helping people in need.', image: 'https://via.placeholder.com/250', tags: ['Non-Profit', 'Support']},
+        {name: 'Green Earth', type: 'Soup Kitchen', location: 'LA', orgType: '501(c)(3)', description: 'Serving meals to the homeless.', image: 'https://via.placeholder.com/250', tags: ['Food', 'Shelter']},
+        {name: 'Community Event', type: 'Event', location: 'Chicago', orgType: 'Private', description: 'An event to raise awareness for local issues.', image: 'https://via.placeholder.com/250', tags: ['Community', 'Event']},
+        {name: 'Safe Haven', type: 'Shelter', location: 'NYC', orgType: 'Non-Profit', description: 'Providing shelter and care for the homeless.', image: 'https://via.placeholder.com/250', tags: ['Shelter', 'Non-Profit']}
+    ];
+
+    // Function to display the cards
+    function displayCards(data) {
+
+        const container = document.getElementById('volunteerList');
+        container.innerHTML = ''; // Clear previous results
+        data.forEach(opportunity => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+                <img src="${opportunity.image}" alt="${opportunity.name}">
+                <h3>${opportunity.name}</h3>
+                <p>${opportunity.description}</p>
+                <div class="tags">
+                    ${opportunity.tags.map(tag => `<span>${tag}</span>`).join('')}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // Function to apply filters
+    function applyFilters() {
+        const search = document.getElementById('search').value.toLowerCase();
+        const location = document.getElementById('location').value;
+        const type = document.getElementById('type').value;
+        const orgType = document.getElementById('orgType').value;
+
+        const filteredData = volunteerData.filter(opportunity => {
+            return (
+                (!search || opportunity.name.toLowerCase().includes(search)) &&
+                (!location || opportunity.location === location) &&
+                (!type || opportunity.type === type) &&
+                (!orgType || opportunity.orgType === orgType)
+            );
+        });
+
+        displayCards(filteredData);
+    }
+
+    // Initial load of volunteer opportunities
+    displayCards(volunteerData); */
+    const volunteerData = <?php echo json_encode($results); ?>;
+
+
+    <!--Shows card data-->
+
+    function applyFilters() {
+      const searchVal = document.getElementById('search').value.toLowerCase();
+      const locationVal = document.getElementById('location').value.toLowerCase();
+      const typeVal = document.getElementById('type').value.toLowerCase();
+      const orgVal = document.getElementById('orgType').value.toLowerCase();
+
+      const filteredData = volunteerData.filter(item => {
+        // Convert item fields to lower case for comparison
+        const nameLC = item.name.toLowerCase();
+        const cityLC = item.city.toLowerCase();
+        const volTypeLC = item.volunteering_type.toLowerCase();
+        const orgTypeLC = item.organization_type.toLowerCase();
+
+        const matchesSearch = !searchVal || nameLC.includes(searchVal);
+        const matchesCity = !locationVal || cityLC === locationVal;
+        const matchesType = !typeVal || volTypeLC === typeVal;
+        const matchesOrg = !orgVal || orgTypeLC === orgVal;
+
+        return matchesSearch && matchesCity && matchesType && matchesOrg;
+      });
+
+      displayCards(filteredData);
+    }
+
+
+
+
+
+  function displayCards(data) {
+    const container = document.getElementById('volunteerList');
+    container.innerHTML = ''; // Clear previous cards
+
+    data.forEach(item => {
+      // Convert columns to your desired HTML
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      // Fallback image if image_url is empty
+      const imageUrl = item.image_url || 'https://via.placeholder.com/250';
+
+      card.innerHTML = `
+        <a href="company_profile.php?id=${item.id}" style="text-decoration: none; color: inherit; display: block;">
+          <img src="${imageUrl}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p>${item.address}, ${item.city}</p>
+          <div class="tags">
+            <span>${item.volunteering_type}</span>
+            <span>${item.organization_type}</span>
+          </div>
+        </a>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+displayCards(volunteerData);
+
+</script>
+
+
+<?php
+    include_once 'footer.php';
+?>
