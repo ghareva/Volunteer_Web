@@ -37,7 +37,7 @@ body.dark-mode nav td:hover{
 }
 
 body.dark-mode {
-  background-color: var(--white-darker);
+  background-color: var(--dark-background);
   color: var(--white);
 }
 
@@ -182,13 +182,13 @@ button:hover {
   border-radius: 50%;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color:var(--white-darker);
   transition: 0.4s;
 }
 
 /* When the checkbox is checked, move the slider to the right */
 input:checked + .slider {
-  background-color: #4CAF50;
+  background-color:var(--white-darker);
 }
 
 input:checked + .slider:before {
