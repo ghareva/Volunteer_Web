@@ -71,6 +71,15 @@ if (isset($_POST['submit']))
     // Running error handlers and user signup
     $signup->signupUser();
 
+    // Log user in after signing up
+    // Instantiate SignupContr class
+    include "../classes/login.classes.php";
+    include "../classes/login-contr.classes.php";
+    $login = new LoginContr($username, $password);
+
+    // Running error handlers and user signup
+    $login->loginUser();
+
     // Going back to front page
     header("location:../index.php?error=none");
 
