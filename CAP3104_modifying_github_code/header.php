@@ -78,6 +78,14 @@ session_start();
             </tr>
             </tbody>
         </table>
-
+        <div class="dark-mode-container">
+      <label class="switch">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
     </div>
 </nav>
+
+<script src="script.js"></script>
+</html>

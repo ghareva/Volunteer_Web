@@ -6,6 +6,7 @@
   --dark-green: #066836;
   --dark-green-lighter: #088745;
   --text-black: #000000;
+  --dark-background: #191c1d;
 }
 
 
@@ -36,7 +37,7 @@ body.dark-mode nav td:hover{
 }
 
 body.dark-mode {
-  background-color: var(--white-darker);
+  background-color: var(--dark-background);
   color: var(--white);
 }
 
@@ -130,11 +131,10 @@ nav a{
     filter: brightness(0.8); 
   }
 
-
   
 button {
   background-color: #007BFF;
-  color: white;
+  color: var(--dark-background);
   border: none;
   padding: 10px 20px;
   font-size: 16px;
@@ -182,13 +182,13 @@ button:hover {
   border-radius: 50%;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color:var(--white-darker);
   transition: 0.4s;
 }
 
 /* When the checkbox is checked, move the slider to the right */
 input:checked + .slider {
-  background-color: #4CAF50;
+  background-color:var(--white-darker);
 }
 
 input:checked + .slider:before {
@@ -197,17 +197,22 @@ input:checked + .slider:before {
 
 /* Add labels to represent dark and light modes */
 .slider:after {
-  content: '🌙'; /* dark mode icon */
+  content: '🌞'; /* dark mode icon */
   position: absolute;
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
   font-size: 16px;
-  color: #fff;
+  color: var(--dark-background);
 }
 
 input:checked + .slider:after {
-  content: '🌞'; /* light mode icon */
+  content: '🌙'; /* light mode icon */
   left: auto;
   right: 10px;
+}
+
+body.dark-mode {
+  background-color: var(--dark-background);
+  color: var(--white); /* This line can stay as it is, ensuring the text is white in dark mode */
 }

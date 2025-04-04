@@ -18,4 +18,3 @@ darkModeToggle.addEventListener('change', () => {
         localStorage.removeItem('dark-mode');
     }
 });
-
