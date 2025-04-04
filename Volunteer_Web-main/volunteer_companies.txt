@@ -1,0 +1,379 @@
+-- I HATE YOU ~(^_^~)
+
+CREATE TABLE IF NOT EXISTS volunteer_companies (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    address VARCHAR(255),
+    city VARCHAR(100),
+    phone VARCHAR(50),
+    volunteering_type ENUM('business', 'shelter', 'soup kitchen', 'event', 'personal') NOT NULL,
+    organization_type ENUM('501c3', 'personal', 'private', 'non-profit', 'government', 'other') NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE volunteer_companies
+  ADD COLUMN image_url VARCHAR(255);
+
+INSERT INTO volunteer_companies 
+  (name, address, city, phone, volunteering_type, organization_type, image_url)
+VALUES
+-- 1
+('Helping Hands',
+ '123 Main St',
+ 'Springfield',
+ '555-123-4567',
+ 'shelter',
+ 'non-profit',
+ 'images/helping_hands.jpg'),
+
+-- 2
+('Green Earth Plan',
+ '456 Elm St',
+ 'Greendale',
+ '555-987-6543',
+ 'business',
+ '501c3',
+ 'images/green_earth_plan.jpg'),
+
+-- 3
+('Safe Haven',
+ '789 Oak Ave',
+ 'Fairview',
+ '555-555-1111',
+ 'shelter',
+ 'non-profit',
+ 'images/safe_haven.jpg'),
+
+-- 4
+('Community Harvest',
+ '101 Maple Rd',
+ 'Brookfield',
+ '555-444-2222',
+ 'soup kitchen',
+ '501c3',
+ 'images/community_harvest.jpg'),
+
+-- 5
+('Clean City Crew',
+ '202 Pine Blvd',
+ 'Riverside',
+ '555-333-1212',
+ 'event',
+ 'government',
+ 'images/clean_city_crew.jpg'),
+
+-- 6
+('Urban Outreach',
+ '303 Cedar St',
+ 'Lakeside',
+ '555-111-5656',
+ 'personal',
+ 'other',
+ 'images/urban_outreach.jpg'),
+
+-- 7
+('River Rescue',
+ '404 Birch Ln',
+ 'Bridgeport',
+ '555-444-7878',
+ 'event',
+ '501c3',
+ 'images/river_rescue.jpg'),
+
+-- 8
+('Neighborhood Care',
+ '505 Walnut Dr',
+ 'Hillview',
+ '555-222-4545',
+ 'business',
+ 'private',
+ 'images/neighborhood_care.jpg'),
+
+-- 9
+('Food for All',
+ '606 Poplar Ave',
+ 'Oakwood',
+ '555-999-1234',
+ 'soup kitchen',
+ 'non-profit',
+ 'images/food_for_all.jpg'),
+
+-- 10
+('City Park Volunteers',
+ '707 Ash Ct',
+ 'Cedarville',
+ '555-888-9999',
+ 'event',
+ 'government',
+ 'images/city_park_volunteers.jpg'),
+
+-- 11
+('Sunrise Support',
+ '808 Magnolia Rd',
+ 'Rosewood',
+ '555-000-1122',
+ 'shelter',
+ '501c3',
+ 'images/sunrise_support.jpg'),
+
+-- 12
+('Eco Warriors',
+ '909 Pinecrest Dr',
+ 'Greendale',
+ '555-333-9898',
+ 'business',
+ 'private',
+ 'images/eco_warriors.jpg'),
+
+-- 13
+('Hopeful Hearts',
+ '111 Maplewood Ln',
+ 'Springfield',
+ '555-123-9999',
+ 'personal',
+ 'non-profit',
+ 'images/hopeful_hearts.jpg'),
+
+-- 14
+('Helping Paws',
+ '222 Dogwood St',
+ 'Fairview',
+ '555-101-2020',
+ 'shelter',
+ 'personal',
+ 'images/helping_paws.jpg'),
+
+-- 15
+('Meal Makers',
+ '333 River Rd',
+ 'Brookfield',
+ '555-202-3030',
+ 'soup kitchen',
+ 'other',
+ 'images/meal_makers.jpg'),
+
+-- 16
+('GreenThumb Initiative',
+ '444 Forest Ave',
+ 'Hillview',
+ '555-303-4040',
+ 'event',
+ '501c3',
+ 'images/greenthumb_initiative.jpg'),
+
+-- 17
+('Reading Buddies',
+ '555 Library Ln',
+ 'Riverside',
+ '555-404-5050',
+ 'personal',
+ 'non-profit',
+ 'images/reading_buddies.jpg'),
+
+-- 18
+('Habitat Builders',
+ '666 Hammer St',
+ 'Bridgeport',
+ '555-505-6060',
+ 'business',
+ '501c3',
+ 'images/habitat_builders.jpg'),
+
+-- 19
+('Open Arms',
+ '777 Peach Dr',
+ 'Lakeside',
+ '555-606-7070',
+ 'shelter',
+ 'non-profit',
+ 'images/open_arms.jpg'),
+
+-- 20
+('Feeding Neighbors',
+ '888 Market St',
+ 'Oakwood',
+ '555-707-8080',
+ 'soup kitchen',
+ 'government',
+ 'images/feeding_neighbors.jpg'),
+
+-- 21
+('Parkside Helpers',
+ '999 Greenway Ln',
+ 'Rosewood',
+ '555-808-9090',
+ 'event',
+ 'private',
+ 'images/parkside_helpers.jpg'),
+
+-- 22
+('Warm Winters',
+ '1001 Frost St',
+ 'Cedarville',
+ '555-111-0000',
+ 'personal',
+ 'other',
+ 'images/warm_winters.jpg'),
+
+-- 23
+('Community Crafters',
+ '1102 Artisan Ave',
+ 'Fairview',
+ '555-222-1111',
+ 'business',
+ '501c3',
+ 'images/community_crafters.jpg'),
+
+-- 24
+('Shelter for All',
+ '1203 Shelter Way',
+ 'Brookfield',
+ '555-333-2222',
+ 'shelter',
+ 'non-profit',
+ 'images/shelter_for_all.jpg'),
+
+-- 25
+('Meals on Wheels',
+ '1304 Rolling Rd',
+ 'Greendale',
+ '555-444-3333',
+ 'soup kitchen',
+ '501c3',
+ 'images/meals_on_wheels.jpg'),
+
+-- 26
+('Beach Cleanup Crew',
+ '1405 Shoreline Dr',
+ 'Riverside',
+ '555-555-4444',
+ 'event',
+ 'personal',
+ 'images/beach_cleanup_crew.jpg'),
+
+-- 27
+('Garden Givers',
+ '1506 Bloom Ln',
+ 'Lakeside',
+ '555-666-5555',
+ 'personal',
+ 'private',
+ 'images/garden_givers.jpg'),
+
+-- 28
+('Neighborhood Tutors',
+ '1607 Scholar St',
+ 'Hillview',
+ '555-777-6666',
+ 'business',
+ 'other',
+ 'images/neighborhood_tutors.jpg'),
+
+-- 29
+('Women in Need',
+ '1708 Lady Ln',
+ 'Bridgeport',
+ '555-888-7777',
+ 'shelter',
+ '501c3',
+ 'images/women_in_need.jpg'),
+
+-- 30
+('Soup n Share',
+ '1809 Broth Ave',
+ 'Oakwood',
+ '555-999-8888',
+ 'soup kitchen',
+ 'private',
+ 'images/soup_n_share.jpg'),
+
+-- 31
+('Harvest Hands',
+ '1901 Orchard Rd',
+ 'Rosewood',
+ '555-101-9999',
+ 'event',
+ 'non-profit',
+ 'images/harvest_hands.jpg'),
+
+-- 32
+('Helping Elders',
+ '2002 Sunrise Ct',
+ 'Springfield',
+ '555-202-0000',
+ 'personal',
+ 'government',
+ 'images/helping_elders.jpg'),
+
+-- 33
+('Safe Shores',
+ '2103 Coastal Dr',
+ 'Fairview',
+ '555-303-1111',
+ 'shelter',
+ 'personal',
+ 'images/safe_shores.jpg'),
+
+-- 34
+('Art for All',
+ '2204 Canvas St',
+ 'Greendale',
+ '555-404-2222',
+ 'business',
+ 'other',
+ 'images/art_for_all.jpg'),
+
+-- 35
+('Community Runners',
+ '2305 Track Ln',
+ 'Brookfield',
+ '555-505-3333',
+ 'event',
+ 'personal',
+ 'images/community_runners.jpg'),
+
+-- 36
+('Street Outreach',
+ '2406 Hope Ave',
+ 'Cedarville',
+ '555-606-4444',
+ 'personal',
+ 'private',
+ 'images/street_outreach.jpg'),
+
+-- 37
+('Hope Springs',
+ '2507 Well St',
+ 'Lakeside',
+ '555-707-5555',
+ 'shelter',
+ '501c3',
+ 'images/hope_springs.jpg'),
+
+-- 38
+('Soul Soup Kitchen',
+ '2608 Harvest Ln',
+ 'Bridgeport',
+ '555-808-6666',
+ 'soup kitchen',
+ 'non-profit',
+ 'images/soul_soup_kitchen.jpg'),
+
+-- 39
+('Green Light',
+ '2709 Renewable Rd',
+ 'Riverside',
+ '555-909-7777',
+ 'business',
+ 'government',
+ 'images/green_light.jpg'),
+
+-- 40
+('Open Fields',
+ '1002 Walnut St',
+ 'Rosewood',
+ '555-440-3322',
+ 'event',
+ 'other',
+ 'images/open_fields.jpg');
