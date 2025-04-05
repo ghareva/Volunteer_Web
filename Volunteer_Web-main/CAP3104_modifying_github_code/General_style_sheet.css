@@ -1,0 +1,303 @@
+:root {
+  --white-darker: #f4f8fb;
+  --white: #fcfcfd;
+  --temp-green: #0bba60;
+  --green-darker: #099A4F;
+  --dark-green: #066836;
+  --dark-green-lighter: #088745;
+  --text-black: #000000;
+  --dark-background: #191c1d;
+}
+
+footer{
+  background-color: var(--temp-green);
+}
+
+body {
+  background-color: var(--white);
+  background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+nav{
+    background-color: var(--temp-green);
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    color: var(--text-black);
+}
+
+.leaderboard{
+  background-color: #d4f5d4;
+  padding: 15px; 
+  border-radius: 10px; 
+  margin: 90px;
+}
+body.dark-mode .leaderboard{
+  background-color: #5bb586;
+  color: var(--white-darker);
+}
+
+.faq-answer{
+  padding: 10px; 
+  background-color: #fafafa; 
+  border-left: 3px solid #1acf65; 
+  margin-top: 5px; 
+  display: none;
+}
+body.dark-mode .faq-answer{
+  background-color: #5bb586;
+  color: var(--white-darker);
+}
+
+.featured-places{
+  background-color: #d4f5d4; 
+  padding: 1rem; 
+  border-radius: 10px;
+}
+
+body.dark-mode .featured-places{
+  background-color: #5bb586;
+  color: var(--white-darker);
+}
+
+.leaderboard_text{
+  background-color: white; 
+  padding: 10px; 
+  border-radius: 8px; 
+  border: 1px solid #ccc;
+}
+
+body.dark-mode .leaderboard_text{
+  background-color: var(--dark-background);
+  color: var(--white-darker);
+}
+
+.about-us-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.about-us-box {
+  background-color: #d4f5d4; /* light green color */
+  border: 2px solid black; /* black outline */
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: 8px; /* Optional: to give rounded corners */
+}
+
+body.dark-mode .about-us-box{
+  background-color: #5bb586;
+  color: var(--white-darker);
+}
+
+.survey-container {
+  max-width: 600px;
+  margin: 5rem auto;
+  padding: 2rem;
+  background-color: #d4f5d4; /* light green */
+  border: 2px solid black;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .survey-container{
+  background-color: #5bb586;
+  color: var(--white-darker);
+}
+
+
+body.dark-mode nav{
+  background-color: var(--dark-green);
+  color: var(--white-darker);
+}
+
+body.dark-mode nav td:hover{
+  background-color: var(--dark-green-lighter);
+}
+
+body.dark-mode {
+  background-color: var(--dark-background);
+  color: var(--white);
+}
+
+nav .nav-right{
+  margin-right: 30px;
+display: flex;
+flex-direction: row-reverse;
+flex-grow: 1;
+}
+nav .nav-left{
+  margin-left: 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+nav td{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+nav td:hover{
+  background-color: var(--green-darker);
+}
+nav td:active{
+  background-color: var(--green-darker);
+}
+nav td:focus{
+  background-color: var(--green-darker);
+}
+nav table{
+  border-collapse: collapse;
+}
+.nav-link.active {
+  background-color: var(--green-darker);
+}
+
+nav a{
+  height: 55px;
+  box-sizing: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  text-decoration: none;
+  color:inherit;
+}
+  .search-bar {
+    margin: 20px;
+    padding: 10px;
+    width: 80%;
+  }
+  .leaderboard, .featured-places {
+    margin: 90px;
+    padding: 15px;
+    border: 20px solid #000;
+  }
+  .leaderboard ul {
+    list-style: none;
+    border: 1px solid #000;
+    padding: 5px;
+  }
+  .featured-places {
+    display: flex;
+    justify-content: space-around;
+  }
+  .place {
+    width: 200px;
+    height: 200px;
+    background: lightblue;
+    text-align: center;
+    padding: 10px;
+  }
+  .footer {
+    text-align: center;
+    padding: 15px;
+    background: #ddd;
+  }
+
+  .image-container
+  {
+  position: relative;
+  display: inline-block;
+  }
+
+  .image-hover 
+  {
+  transition: 0.3s;
+  }
+
+  .image-hover:hover 
+  {
+    filter: brightness(0.8); 
+  }
+
+  
+button {
+  background-color: #007BFF;
+  color: var(--dark-background);
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+/*DARK MODE SWITCH*/
+
+/* Style for the toggle switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  left: 4px;
+  bottom: 4px;
+  background-color:var(--white-darker);
+  transition: 0.4s;
+}
+
+/* When the checkbox is checked, move the slider to the right */
+input:checked + .slider {
+  background-color:var(--white-darker);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Add labels to represent dark and light modes */
+.slider:after {
+  content: '🌞'; /* dark mode icon */
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: var(--dark-background);
+}
+
+input:checked + .slider:after {
+  content: '🌙'; /* light mode icon */
+  left: auto;
+  right: 10px;
+}
+
+body.dark-mode {
+  background-color: var(--dark-background);
+  color: var(--white); /* This line can stay as it is, ensuring the text is white in dark mode */
+}
