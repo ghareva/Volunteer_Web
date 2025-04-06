@@ -60,7 +60,10 @@ if (!$company) {
     <p><strong>Organization Type:</strong> <?php echo htmlspecialchars($company['organization_type']); ?></p>
     <p><strong>Created At:</strong> <?php echo htmlspecialchars($company['created_at']); ?></p>
 
-    <a href="volunteer_link.php">Back to Opportunities</a>
+
+    <a href="Volunteer_Page.php" style="text-decoration: none;">
+      <button type="button">Back to Opportunities</button>
+    </a>
 </div>
 
 </body>
