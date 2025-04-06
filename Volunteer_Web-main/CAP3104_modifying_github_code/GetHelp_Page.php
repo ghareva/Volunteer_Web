@@ -17,19 +17,39 @@
     </tr>
 </table>
 <hr>
-<div style="text-align: center;">
-    <a href="#" style="display: inline-block; width: 30%; padding: 10px; text-decoration: none; color: inherit; border: 2px solid #1acf65; border-radius: 8px; margin: 10px;">
-        <h3>Getting Started</h3>
-    </a>
+<!--
+SO I DELETED THE BUTTONS. DO YOU WANNA MAKE A BIG DEAL OUT OF IT OR SOMETHING!?
 
-    <a href="#" style="display: inline-block; width: 30%; padding: 10px; text-decoration: none; color: inherit; border: 2px solid #1acf65; border-radius: 8px; margin: 10px;">
-        <h3>Account Help</h3>
-    </a>
+        .-""""-.
+        / -   -  \
+       |  O   O   |
+       |    ^     |
+       |  \___/   |
+        \_______/
+         _| | |_
+        /       \
+       |  \   /  |
+        \  \ /  /
+         '._|_.'
 
-    <a href="#" style="display: inline-block; width: 30%; padding: 10px; text-decoration: none; color: inherit; border: 2px solid #1acf65; border-radius: 8px; margin: 10px;">
-        <h3>Managing Hours</h3>
-    </a>
-</div>
+-->
+
+
+
+
+<!--/* <div style="text-align: center;">
+        <a href="#" style="display: inline-block; width: 30%; padding: 10px; text-decoration: none; color: inherit; border: 2px solid #1acf65; border-radius: 8px; margin: 10px;">
+            <h3>Getting Started</h3>
+        </a>
+
+        <a href="#" style="display: inline-block; width: 30%; padding: 10px; text-decoration: none; color: inherit; border: 2px solid #1acf65; border-radius: 8px; margin: 10px;">
+            <h3>Account Help</h3>
+        </a>
+
+        <a href="#" style="display: inline-block; width: 30%; padding: 10px; text-decoration: none; color: inherit; border: 2px solid #1acf65; border-radius: 8px; margin: 10px;">
+            <h3>Managing Hours</h3>
+        </a>
+    </div> */-->
 
 <!-- FAQ Section -->
 <div class="faq-section" style="margin: 20px; padding: 10px; border-top: 2px solid #ccc;">
