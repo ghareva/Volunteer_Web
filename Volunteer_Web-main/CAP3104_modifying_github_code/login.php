@@ -6,7 +6,7 @@ include_once 'header.php';
     <h2>Login</h2>
     <form action="includes/login.inc.php" method="post">
         <div>
-            <input type="text" name="username" placeholder="Username/Email">
+            <input type="text" name="email" placeholder="Email">
         </div>
         <div>
             <input type="password" name="password" placeholder="Password">
@@ -24,7 +24,7 @@ include_once 'header.php';
         }
         else if ($_GET["error"] == "wronglogin")
         {
-            echo "<p>Incorrect username or password</p>";
+            echo "<p>Incorrect email or password</p>";
         }
     }
     ?>

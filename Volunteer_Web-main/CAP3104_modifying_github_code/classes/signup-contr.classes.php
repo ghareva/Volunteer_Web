@@ -2,71 +2,43 @@
 // Make changes inside the database
 class SignupContr extends Signup
 {
-    private $name;
+    private $firstname;
+    private $lastname;
     private $email;
-    private $username;
     private $password;
-    private $passwordRepeat;
-
-    public function __construct($name, $email, $username, $password, $passwordRepeat)
+    public function __construct($firstname, $lastname, $email, $password)
     {
-        $this->name = $name;
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
         $this->email = $email;
-        $this->username = $username;
         $this->password = $password;
-        $this->passwordRepeat = $passwordRepeat;
     }
 
     public function signupUser()
     {
         if ($this->emptyInput())
         {
-            // echo "Empty input!";
             header("location: ../signup.php?error=emptyinput");
-            exit();
-        }
-        if ($this->invalidUsername())
-        {
-            // echo "Empty input!";
-            header("location: ../signup.php?error=invalidusername");
             exit();
         }
         if ($this->invalidEmail())
         {
-            // echo "Empty input!";
             header("location: ../signup.php?error=invalidemail");
             exit();
         }
-        if (!$this->passwordMatch())
+        if ($this->emailTaken())
         {
-            // echo "Empty input!";
-            header("location: ../signup.php?error=passwordmismatch");
-            exit();
-        }
-        if ($this->usernameTaken())
-        {
-            // echo "Empty input!";
-            header("location: ../signup.php?error=usernametaken");
+            header("location: ../signup.php?error=emailtaken");
             exit();
         }
 
-        $this->setUser($this->name, $this->email, $this->username, $this->password);
+        $this->setUser($this->firstname, $this->lastname, $this->email, $this->password);
     }
 
     private function emptyInput()
     {
         $result = false;
-        if (empty($this->name) || empty($this->username) || empty($this->email) || empty($this->password) || empty($this->passwordRepeat))
-        {
-            $result = true;
-        }
-        return $result;
-    }
-
-    private function invalidUsername()
-    {
-        $result = false;
-        if(!preg_match("/^[a-zA-Z0-9]*$/", $this->username))
+        if (empty ($this->firstname) || empty ($this->lastname) || empty ($this->email) || empty ($this->password))
         {
             $result = true;
         }
@@ -83,23 +55,19 @@ class SignupContr extends Signup
         return $result;
     }
 
-    private function passwordMatch()
+    private function emailTaken()
     {
         $result = false;
-        if($this->password == $this->passwordRepeat)
+        if ($this->checkEmail($this->email))
         {
             $result = true;
         }
         return $result;
     }
 
-    private function usernameTaken()
+    public function fetchUserId($email)
     {
-        $result = false;
-        if ($this->checkUser($this->username, $this->email))
-        {
-            $result = true;
-        }
-        return $result;
+        $userId = $this->getUserId($email);
+        return $userId[0]["id"];
     }
 }

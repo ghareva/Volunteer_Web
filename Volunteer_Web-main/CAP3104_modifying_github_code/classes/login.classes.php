@@ -2,19 +2,19 @@
 // Database related stuff (queries, etc.)
 class Login extends dbh
 {
-    protected function getUser($username, $password)
+    protected function getUser($email, $password)
     {
-        // Checking if inputted username or email is inside database
-        $stmt = $this->connect()->prepare('SELECT * FROM users WHERE usersUsername = ? OR usersEmail = ?');
+        // Checking if inputted email is inside database
+        $stmt = $this->connect()->prepare('SELECT * FROM users WHERE email = ?');
 
-        if (!$stmt->execute(array($username, $username)))
+        if (!$stmt->execute(array($email)))
         {
             $stmt = null;
             header("location: ../login.php?error=stmtfailed");
             exit();
         }
 
-        // Check if user/email exists
+        // Check if email exists
         if ($stmt->rowCount() == 0)
         {
             $stmt = null;
@@ -23,7 +23,7 @@ class Login extends dbh
         }
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        $hashedPassword = $user['usersPassword'];
+        $hashedPassword = $user['password'];
 
         if (!password_verify($password, $hashedPassword))
         {
@@ -34,8 +34,9 @@ class Login extends dbh
 
         // Start session
         session_start();
-        $_SESSION["usersId"] = $user["usersId"];
-        $_SESSION["usersUsername"] = $user["usersUsername"];
+        $_SESSION["id"] = $user["id"];
+        $_SESSION["firstname"] = $user["firstname"];
+        $_SESSION["lastname"] = $user["lastname"];
 
         $stmt = null;
     }
