@@ -6,19 +6,16 @@
         <h2>Sign Up!</h2>
         <form action="includes/signup.inc.php" method="post">
             <div>
-                <input type="text" name="name" placeholder="Full Name">
+                <input type="text" name="firstname" placeholder="First Name">
+            </div>
+            <div>
+                <input type="text" name="lastname" placeholder="Last Name">
             </div>
             <div>
                 <input type="text" name="email" placeholder="Email">
             </div>
             <div>
-                <input type="text" name="username" placeholder="Username">
-            </div>
-            <div>
                 <input type="password" name="password" placeholder="Password">
-            </div>
-            <div>
-                <input type="password" name="passwordRepeat" placeholder="Repeat Password">
             </div>
             <div>
                 <button type="submit" name="submit">Sign Up</button>
@@ -35,17 +32,9 @@
             {
                 echo "<p>Invalid Email!</p>";
             }
-            else if ($_GET["error"] == "invalidusername")
+            else if ($_GET["error"] == "emailtaken")
             {
-                echo "<p>Invalid Username!</p>";
-            }
-            else if ($_GET["error"] == "passwordmismatch")
-            {
-                echo "<p>Passwords don't match!</p>";
-            }
-            else if ($_GET["error"] == "usernametaken")
-            {
-                echo "<p>Username already taken!</p>";
+                echo "<p>An account with this email already exists!</p>";
             }
             else if ($_GET["error"] == "none")
             {

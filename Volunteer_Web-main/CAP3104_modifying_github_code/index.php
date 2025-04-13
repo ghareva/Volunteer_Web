@@ -14,14 +14,14 @@
             $conn  = $dbObj->getConnection();
 
             // Select top 3 users based on userHours
-            $sql = "SELECT usersName, userHours FROM users ORDER BY userHours DESC LIMIT 3";
+            $sql = "SELECT firstname, lastname, volunteer_hours FROM users ORDER BY volunteer_hours DESC LIMIT 3";
             $stmt = $conn->prepare($sql); 
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC); 
 
             if (count($result) > 0) { 
                 foreach ($result as $row) {
-                    echo "<li>{$row['usersName']} - {$row['userHours']} hours</li>";
+                    echo "<li>{$row['firstname']} {$row['lastname']} - {$row['volunteer_hours']} hours</li>";
                 }
             }
         ?>
@@ -36,14 +36,14 @@
             $conn  = $dbObj->getConnection();
 
             // Select all users sorted by userHours
-            $sql = "SELECT usersName, userHours FROM users ORDER BY userHours DESC";
+            $sql = "SELECT firstname, lastname, volunteer_hours FROM users ORDER BY volunteer_hours DESC";
             $stmt = $conn->prepare($sql); 
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC); 
 
             if (count($result) > 0) { 
                 foreach ($result as $row) {
-                    echo "<li>{$row['usersName']} - {$row['userHours']} hours</li>";
+                    echo "<li>{$row['firstname']} {$row['lastname']} - {$row['volunteer_hours']} hours</li>";
                 }
             }
         ?>

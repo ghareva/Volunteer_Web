@@ -2,12 +2,12 @@
 // Make changes inside the database
 class LoginContr extends Login
 {
-    private $username;
+    private $email;
     private $password;
 
-    public function __construct($username, $password)
+    public function __construct($email, $password)
     {
-        $this->username = $username;
+        $this->email = $email;
         $this->password = $password;
     }
 
@@ -20,13 +20,13 @@ class LoginContr extends Login
             exit();
         }
 
-        $this->getUser($this->username, $this->password);
+        $this->getUser($this->email, $this->password);
     }
 
     private function emptyInput()
     {
         $result = false;
-        if (empty($this->username) || empty($this->password))
+        if (empty($this->email) || empty($this->password))
         {
             $result = true;
         }

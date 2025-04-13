@@ -8,7 +8,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Volunteer Homepage</title>
-    <link rel="stylesheet" href="General_style_sheet.css">
+    <link rel="stylesheet" href="General_style_sheet.css?v=<?php echo time(); ?>">
 </head>
 <body class = "light-mode">
 <nav>
@@ -57,11 +57,16 @@ session_start();
                 */
                 ?>
                 <?php
-                    if(isset($_SESSION['usersId']))
+                    if(isset($_SESSION['id']))
                     {
                 ?>
-                    <td>
-                        <a href="User_Profile.php"><?php echo $_SESSION["usersUsername"]; ?></a>
+                    <td class="dropdown">
+                        <a href="User_Profile.php" class="dropbtn"><?php echo $_SESSION["firstname"]; ?> ▾</a>
+                        <div class="dropdown-content">
+                            <a href="User_Profile.php">Profile Info</a>
+                            <a href="User_Availability.php">Availability</a>
+                            <a href="User_Calendar.php">Calendar</a>
+                        </div>
                     </td>
                     <td>
                         <a href="includes/logout.inc.php">Logout</a>
@@ -71,9 +76,6 @@ session_start();
                     else
                     {
                 ?>
-                    <td>
-                        <a href="signup.php">Sign Up</a>
-                    </td>
                     <td>
                         <a href="login.php">Login</a>
                     </td>
