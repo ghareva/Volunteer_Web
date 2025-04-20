@@ -7,6 +7,19 @@
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
+
+-- disable FK‐checks so drops won’t fail
+SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS `availability`;
+DROP TABLE IF EXISTS `events`;
+DROP TABLE IF EXISTS `volunteer_companies`;
+DROP TABLE IF EXISTS `users`;
+
+-- re‐enable FK‐checks
+SET FOREIGN_KEY_CHECKS = 1;
+
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";

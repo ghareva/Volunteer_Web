@@ -14,20 +14,37 @@ footer{
 }
 
 body {
-  background-color: var(--white);
-  background-repeat: no-repeat;
-    background-attachment: fixed;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
 
-nav{
-    background-color: var(--temp-green);
-    display: flex;
-    flex-direction: row;
-    height: 60px;
-    color: var(--text-black);
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: url("images/volunteering.png")
+  no-repeat center center;
+  background-size: cover;
+  filter: saturate(80%);
+  opacity: 0.3;
+}
+
+body.dark-mode::before {
+  /* keep the low saturation, and drop brightness way down */
+  filter: saturate(20%) brightness(30%);
+}
+
+nav {
+  background-color: var(--temp-green);
+  display: flex;
+  /* remove height:… */
+  padding: 16px 0;           /* ↑ 16px top & bottom padding = thicker bar */
+  color: var(--text-black);
 }
 
 .leaderboard{
@@ -158,15 +175,14 @@ nav table{
   background-color: var(--green-darker);
 }
 
-nav a{
-  height: 55px;
-  box-sizing: inherit;
+nav a {
+  padding: 0 16px;          /* ↑ left/right breathing room */
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
+  align-items: center;
   text-decoration: none;
-  color:inherit;
+  color: inherit;
+  font-size: 1.80rem;      /* ↑ about 18px; scales with root font */
+  font-weight: 700;
 }
   .search-bar {
     margin: 20px;
